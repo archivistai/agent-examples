@@ -1,0 +1,29 @@
+{
+  "name": "archivist-ai-agent-examples",
+  "version": "1.0.0",
+  "description": "Examples and agent configurations for integrating Archivist AI -- a TTRPG campaign memory platform -- with AI assistants via MCP, OpenAI Agents, and Vercel AI SDK.",
+  "keywords": [
+    "archivist",
+    "archivist-ai",
+    "mcp",
+    "model-context-protocol",
+    "ttrpg",
+    "dnd",
+    "campaign-management",
+    "ai-agents",
+    "openai",
+    "claude",
+    "cursor",
+    "windsurf",
+    "tabletop-rpg",
+    "session-recap",
+    "campaign-memory"
+  ],
+  "homepage": "https://www.myarchivist.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Archivist-AI/agent-examples"
+  },
+  "license": "MIT",
+  "private": true
+}

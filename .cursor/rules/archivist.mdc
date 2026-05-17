@@ -1,0 +1,41 @@
+---
+description: Archivist AI MCP integration rules for Cursor
+globs: "**/*"
+---
+
+# Archivist AI MCP Integration
+
+This project uses the Archivist AI MCP server for TTRPG campaign data access.
+
+## MCP Server
+
+- **URL:** `https://mcp.myarchivist.ai/mcp`
+- **Transport:** Streamable HTTP
+- **Authentication:** OAuth 2.0 or Bearer token
+
+## Available Tools
+
+25 read-only tools organized by domain:
+
+- **Campaigns:** `list_campaigns`, `get_campaign`, `get_campaign_stats`
+- **Characters:** `list_characters`, `get_character`
+- **Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`
+- **Beats:** `list_beats`, `get_beat`
+- **Moments:** `list_moments`, `get_moment`
+- **Factions:** `list_factions`, `get_faction`
+- **Locations:** `list_locations`, `get_location`
+- **Items:** `list_items`, `get_item`
+- **Quests:** `list_quests`, `get_quest`
+- **Journals:** `list_journals`, `get_journal`, `list_journal_folders`, `get_journal_folder`
+- **Links:** `list_links`
+
+## Usage Patterns
+
+- Always start by calling `list_campaigns` to discover available campaigns
+- Most tools require a `campaign_id` parameter -- get this from `list_campaigns` first
+- Use `get_campaign_stats` for a quick overview of campaign size and content
+- Sessions are ordered chronologically; use `list_sessions` then `get_session` with `include_beats` and `include_moments` for full detail
+- Beats represent narrative structure (major > minor > step hierarchy)
+- Moments capture memorable quotes and events
+- Links represent relationships between any two entities (characters, factions, locations, items)
+- Journal content is omitted from `list_journals` for performance; use `get_journal` for full content
