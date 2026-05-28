@@ -31,13 +31,13 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 - **Transport Type:** Streamable HTTP
 - **Authentication:** OAuth 2.0 (authorization code with PKCE) or Bearer token via API key
 - **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
-- **Tools:** 25 read-only tools covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, and entity links
+- **Tools:** 27 read-only tools covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, and entity links
 
 ### Available MCP Tools
 
 **Campaigns:** `list_campaigns`, `get_campaign`, `get_campaign_stats`
 **Characters:** `list_characters`, `get_character`
-**Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`
+**Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`, `get_session_handout`, `get_session_transcript`
 **Beats:** `list_beats`, `get_beat`
 **Moments:** `list_moments`, `get_moment`
 **Factions:** `list_factions`, `get_faction`

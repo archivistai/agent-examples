@@ -14,6 +14,16 @@ The Archivist MCP server gives AI assistants direct, read-only access to your ca
 **Transport:** Streamable HTTP
 **Authentication:** OAuth 2.0 (authorization code + PKCE) or Bearer token
 
+### Claude.ai (Connectors Directory)
+
+Connect Archivist as a remote MCP connector in Claude on the web — no config file required.
+
+1. Open **Settings → Connectors** in [claude.ai](https://claude.ai)
+2. Add custom connector URL: `https://mcp.myarchivist.ai/mcp`
+3. Complete OAuth sign-in with your Archivist account
+
+Full guide: [examples/claude-ai/README.md](examples/claude-ai/README.md)
+
 ### Claude Desktop
 
 Add to your `claude_desktop_config.json`:
@@ -62,6 +72,7 @@ Add to your MCP configuration:
 
 | Example | Description | Language |
 |---------|-------------|----------|
+| [Claude.ai Setup](examples/claude-ai/) | Connect Archivist to Claude on the web via OAuth connector | Config |
 | [Claude Desktop Setup](examples/claude-desktop/) | Connect Archivist to Claude Desktop via MCP | Config |
 | [Cursor Setup](examples/cursor/) | Connect Archivist to Cursor IDE via MCP | Config |
 | [Windsurf Setup](examples/windsurf/) | Connect Archivist to Windsurf IDE via MCP | Config |
@@ -73,7 +84,7 @@ Add to your MCP configuration:
 
 ## MCP Tools Reference
 
-The Archivist MCP server exposes 25 read-only tools for accessing campaign data:
+The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 
 ### Campaigns
 
@@ -97,6 +108,8 @@ The Archivist MCP server exposes 25 read-only tools for accessing campaign data:
 | `list_sessions` | List game sessions in a campaign. Filter by session type or public-only. |
 | `get_session` | Get a session by ID. Optionally include related beats and moments. |
 | `get_session_cast_analysis` | Get cast analysis for a session: talk-share breakdown and core metrics. |
+| `get_session_handout` | Get the generated session handout: summary, outlines, and spotlights. |
+| `get_session_transcript` | Get the cleaned session transcript with utterances and aggregate stats. |
 
 ### Story Structure
 
@@ -154,9 +167,26 @@ Get your API key from the [Developer tab](https://app.myarchivist.ai/profile?sec
 
 ## Available On
 
+- [Official MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.Astrotomic/archivist-ai) — `io.github.Astrotomic/archivist-ai`
 - [Smithery](https://smithery.ai/servers/me-26lt/archivist-ai)
 - [Glama](https://glama.ai/mcp/connectors/ai.myarchivist.mcp/mcp-archivist-ai)
 - [mcp.so](https://mcp.so/server/archivist-ai/Archivist%20AI)
+
+## Connectors Directory (Anthropic)
+
+Preparing for Claude's Connectors Directory? Start here:
+
+- [Anthropic submission guide](docs/anthropic-connectors-directory.md)
+- [Claude.ai setup](examples/claude-ai/README.md)
+- [Reviewer guide template](docs/reviewer-guide.md)
+- [Tool testing matrix](docs/tool-testing.md)
+- [Tools manifest for submission form](docs/tools-directory-manifest.md)
+
+Verify live server metadata:
+
+```bash
+./scripts/verify-server-card.sh
+```
 
 ## Resources
 
@@ -165,6 +195,8 @@ Get your API key from the [Developer tab](https://app.myarchivist.ai/profile?sec
 - [MCP Server Card](https://mcp.myarchivist.ai/.well-known/mcp/server-card.json) -- Machine-readable server capabilities
 - [For AI Agents](docs/for-ai-agents.md) -- Structured guide for LLM tool selection
 - [MCP Tool Reference](docs/mcp-tool-reference.md) -- Complete tool documentation
+- [Anthropic Connectors Directory](docs/anthropic-connectors-directory.md) -- Submission checklist
+- [Privacy Policy](https://www.myarchivist.ai/privacy) -- Required for directory submission
 - [Discord](https://discord.gg/t3yk6AWyg7) -- Community and support
 
 ## License
