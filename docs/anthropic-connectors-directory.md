@@ -28,6 +28,88 @@ Archivist MCP can be listed in Anthropic's **Connectors Directory** (Claude.ai, 
 | **Support** | contact@myarchivist.ai |
 | **GitHub** | https://github.com/Astrotomic/mcp.myarchivist.ai |
 
+## Form copy — descriptions
+
+### Short description (55 characters max)
+
+```text
+Read-only campaign memory for tabletop RPG storytelling
+```
+
+(55 characters)
+
+### Long description (50–100 words)
+
+```text
+Archivist AI gives Claude persistent memory of your tabletop RPG campaigns. Connect with OAuth to browse campaigns, recap sessions, look up characters and NPCs, track quests, read journals, and explore relationships between factions, locations, and items. The connector exposes 27 read-only tools backed by Archivist's first-party API—no write access in v1. Ideal for session prep, between-session recaps, lore lookup, and answering questions about your world without leaving Claude.
+```
+
+## Form copy — use cases + example prompts
+
+Paste into **Use Cases + Examples** on the submission form. Submit at least three; all five are recommended.
+
+Also documented in the MCP repo as ChatGPT app test cases ([`chatgpt-app-submission.json`](https://github.com/Astrotomic/mcp.myarchivist.ai/blob/main/chatgpt-app-submission.json)); the prompts below are natural-language versions suitable for Claude.ai reviewers.
+
+### 1. Session recap (between games)
+
+**Use case:** GMs and players get a quick recap from Archivist session data, handouts, and story beats without digging through notes.
+
+**Example prompt:**
+
+```text
+What happened in my last three game sessions? Include major beats and open plot threads.
+```
+
+**Tools exercised:** `list_campaigns`, `list_sessions`, `get_session`, `get_session_handout`, `list_beats`
+
+### 2. Quest & plot tracking (session prep)
+
+**Use case:** Surfaces active quests, objectives, and progress from Archivist so Claude can help with prep and continuity.
+
+**Example prompt:**
+
+```text
+Show all in-progress quests and summarize what we still need to resolve before the next session.
+```
+
+**Tools exercised:** `list_quests`, `get_quest`
+
+### 3. Character & relationship lookup (world lore)
+
+**Use case:** Pulls characters, factions, locations, and entity links so Claude answers lore questions from your actual campaign memory.
+
+**Example prompt:**
+
+```text
+Who are the most important NPCs in my campaign? Summarize each and how they relate to other characters and factions.
+```
+
+**Tools exercised:** `list_characters`, `get_character`, `list_links`, `list_factions`
+
+### 4. Campaign overview (optional)
+
+**Use case:** Discover campaigns and get a high-level snapshot of each world's size and activity.
+
+**Example prompt:**
+
+```text
+List my Archivist campaigns and summarize the stats for each one.
+```
+
+**Tools exercised:** `list_campaigns`, `get_campaign_stats`
+
+### 5. Faction or location deep dive (optional)
+
+**Use case:** Cross-session lore lookup for a specific faction, location, or entity without manual search.
+
+**Example prompt:**
+
+```text
+What do we know about the Thieves' Guild across all sessions?
+```
+
+**Tools exercised:** `list_factions`, `get_faction`, `list_links`, `list_moments`, `list_sessions`
+
 ## Pre-submission checklist
 
 ### Technical (required)
