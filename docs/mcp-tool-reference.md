@@ -101,6 +101,24 @@ Get the cast analysis for a game session, including talk-share breakdown and cor
 |------|------|----------|-------------|
 | `session_id` | string | Yes | The session ID |
 
+### `get_session_handout`
+
+Get the generated session handout for a game session, including summary, outlines, spotlights, and notable moments.
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `session_id` | string | Yes | The session ID |
+
+### `get_session_transcript`
+
+Get the cleaned transcript for a game session, including utterances, full text, and aggregate stats.
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `session_id` | string | Yes | The session ID |
+
 ---
 
 ## Beats

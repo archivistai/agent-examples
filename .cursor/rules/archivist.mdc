@@ -15,11 +15,11 @@ This project uses the Archivist AI MCP server for TTRPG campaign data access.
 
 ## Available Tools
 
-25 read-only tools organized by domain:
+27 read-only tools organized by domain:
 
 - **Campaigns:** `list_campaigns`, `get_campaign`, `get_campaign_stats`
 - **Characters:** `list_characters`, `get_character`
-- **Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`
+- **Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`, `get_session_handout`, `get_session_transcript`
 - **Beats:** `list_beats`, `get_beat`
 - **Moments:** `list_moments`, `get_moment`
 - **Factions:** `list_factions`, `get_faction`
