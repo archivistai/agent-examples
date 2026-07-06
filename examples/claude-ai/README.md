@@ -9,7 +9,7 @@ Use Archivist as a **remote MCP connector** in Claude on the web (claude.ai). No
 | **Server URL** | `https://mcp.myarchivist.ai/mcp` |
 | **Transport** | Streamable HTTP |
 | **Authentication** | OAuth 2.0 (PKCE) via your Archivist account |
-| **Tools** | 27 read-only campaign memory tools |
+| **Tools** | 68 tools (28 read, 40 write) |
 
 ## Connect (Claude.ai)
 

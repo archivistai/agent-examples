@@ -1,6 +1,6 @@
 # MCP Tool Testing Matrix
 
-Run before Anthropic Connectors Directory submission. Anthropic reviewers **call every tool** with valid parameters.
+Run before Anthropic Connectors Directory submission. The server exposes **68 tools** (28 read, 40 write). Test read tools with a read-scoped OAuth client; test write and image tools with `agent_write` scope or a Bearer API key.
 
 Verify live metadata first:
 
@@ -56,6 +56,17 @@ Mark each row after a successful call with valid params and a non-error response
 | 25 | list-journal-folders-tool | list_journal_folders | campaign_id | |
 | 26 | get-journal-folder-tool | get_journal_folder | folder_id | |
 | 27 | list-links-tool | list_links | campaign_id | Optional filters |
+
+## Write and image tools
+
+Test with `agent_write` scope or Bearer API key. Full list: [mcp-tool-reference.md](./mcp-tool-reference.md). Minimum smoke tests before submit:
+
+| Area | Tools to exercise |
+|------|-------------------|
+| Compendium | `create_character` → `update_character` (with `with_links: true` read first) → `delete_character` on a throwaway record |
+| Links | `create_link` → `update_link` → `delete_link` |
+| Images | `get_image_usage` → `generate_image` (or `init_image_upload` + PUT + `complete_image_upload`) → `delete_entity_image` |
+| Sessions | `create_session` → `patch_session` (no delete — not exposed) |
 
 ## Testing surfaces
 

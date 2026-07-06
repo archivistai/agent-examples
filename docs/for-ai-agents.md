@@ -31,7 +31,8 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 - **Transport Type:** Streamable HTTP
 - **Authentication:** OAuth 2.0 (authorization code with PKCE) or Bearer token via API key
 - **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
-- **Tools:** 27 read-only tools covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, and entity links
+- **Tools:** 68 tools (28 read, 40 write) covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, entity links, and entity images
+- **Write scope:** OAuth clients need `agent_write` for mutating tools
 
 ### Available MCP Tools
 
@@ -45,7 +46,10 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 **Items:** `list_items`, `get_item`
 **Quests:** `list_quests`, `get_quest`
 **Journals:** `list_journals`, `get_journal`, `list_journal_folders`, `get_journal_folder`
-**Links:** `list_links`
+**Links:** `list_links`, `create_link`, `update_link`, `delete_link`, `bulk_link_maintenance`
+**Images:** `get_image_usage`, `generate_image`, `init_image_upload`, `complete_image_upload`, `delete_entity_image`
+
+When editing text that may contain wikilinks, read with `with_links: true` first.
 
 ## REST API
 
@@ -63,6 +67,7 @@ For direct HTTP access:
 - Query campaign data via RAG: `POST /v1/ask` (supports SSE streaming)
 - CRUD for entities: characters, locations, factions, items, quests, journals
 - Entity relationship management via links
+- Entity images: quota check, AI generation, presigned upload, and removal (`/v1/images/*`)
 
 ## Authentication
 
@@ -87,9 +92,11 @@ When connected via MCP, try these prompts:
 ## Constraints
 
 - All data endpoints require authentication
-- MCP tools are read-only (v1); write operations use the REST API
+- MCP write and image tools require the `agent_write` OAuth scope (or API key Bearer token)
+- Read tools are available with read scopes; pass `with_links: true` before editing wikilink-bearing text
 - Rate limits apply per API key (429 responses include `Retry-After`)
 - Session processing is asynchronous (audio must be uploaded and processed before data is available)
+- Direct image upload requires an HTTP PUT between MCP `init_image_upload` and `complete_image_upload`
 
 ## Links
 

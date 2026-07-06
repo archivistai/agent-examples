@@ -2,7 +2,7 @@
 
 Human-readable tool list for Anthropic Connectors Directory submission. Generated from live server card at `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`.
 
-**Tool count:** 27 · **All read-only** · **Annotations:** `readOnlyHint: true`, `destructiveHint: false`
+**Tool count:** 68 (28 read, 40 write) · **Refresh from live server card** · Annotations vary by tool (`readOnlyHint`, `destructiveHint`)
 
 | MCP name | Title | Snake alias | Description |
 |----------|-------|-------------|-------------|
@@ -34,8 +34,10 @@ Human-readable tool list for Anthropic Connectors Directory submission. Generate
 | get-journal-folder-tool | Get Journal Folder Tool | get_journal_folder | Get a specific journal folder by ID. |
 | list-links-tool | List Links Tool | list_links | List entity links. Filter by source/target and alias. |
 
+Write and image tools (`create_*`, `update_*`, `delete_*`, `generate_image`, etc.) are not listed in this table. Refresh the full catalog from production (see below) or see [mcp-tool-reference.md](./mcp-tool-reference.md).
+
 Refresh from production:
 
 ```bash
-curl -s https://mcp.myarchivist.ai/.well-known/mcp/server-card.json | jq '.tools[] | {name, title, description}'
+curl -s https://mcp.myarchivist.ai/.well-known/mcp/server-card.json | jq '.tools[] | {name, title, description, annotations}'
 ```

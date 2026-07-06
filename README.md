@@ -8,7 +8,7 @@ Archivist AI is a **TTRPG campaign memory platform** for game masters and player
 
 ### Connect via MCP (Model Context Protocol)
 
-The Archivist MCP server gives AI assistants direct, read-only access to your campaign data. No SDK or API key wrangling required -- just point your client at the server.
+The Archivist MCP server gives AI assistants direct access to your campaign data — read and write. OAuth clients use PKCE; programmatic clients can pass an API key as a Bearer token. Write tools require the `agent_write` OAuth scope.
 
 **MCP Server URL:** `https://mcp.myarchivist.ai/mcp`
 **Transport:** Streamable HTTP
@@ -84,9 +84,15 @@ Add to your MCP configuration:
 
 ## MCP Tools Reference
 
-The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
+The Archivist MCP server (v2.1) exposes **68 tools**: 28 read tools and 40 write tools (including five image tools). Read tools are idempotent; delete tools are destructive but idempotent.
 
-### Campaigns
+For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-tool-reference.md). Source of truth: [mcp.myarchivist.ai README](https://github.com/Astrotomic/mcp.myarchivist.ai).
+
+**Before editing text fields:** pass `with_links: true` on get/list calls for characters, factions, locations, items, beats, moments, sessions, and journals so `[[wikilink]]` markup is preserved on round-trip writes.
+
+### Read Tools
+
+### Campaigns (read)
 
 | Tool | Description |
 |------|-------------|
@@ -94,14 +100,14 @@ The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 | `get_campaign` | Get a specific campaign by ID. |
 | `get_campaign_stats` | Get statistics for a campaign: character count, session count, and more. |
 
-### Characters
+### Characters (read)
 
 | Tool | Description |
 |------|-------------|
 | `list_characters` | List characters in a campaign. Filter by name, type (PC/NPC), or approval status. |
 | `get_character` | Get a character by ID including aliases, backstory, and speaker linkage. |
 
-### Sessions
+### Sessions (read)
 
 | Tool | Description |
 |------|-------------|
@@ -111,7 +117,7 @@ The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 | `get_session_handout` | Get the generated session handout: summary, outlines, and spotlights. |
 | `get_session_transcript` | Get the cleaned session transcript with utterances and aggregate stats. |
 
-### Story Structure
+### Story Structure (read)
 
 | Tool | Description |
 |------|-------------|
@@ -120,7 +126,7 @@ The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 | `list_moments` | List moments in a campaign or session. Moments capture memorable quotes and events. |
 | `get_moment` | Get a specific moment by ID. |
 
-### World Building
+### World Building (read)
 
 | Tool | Description |
 |------|-------------|
@@ -131,14 +137,14 @@ The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 | `list_items` | List items in a campaign. Items include weapons, armour, artefacts, and other notable objects. |
 | `get_item` | Get a specific item by ID. |
 
-### Quests
+### Quests (read)
 
 | Tool | Description |
 |------|-------------|
 | `list_quests` | List quests with pagination. Filter by status or category. |
 | `get_quest` | Get a fully expanded quest: objectives, progress log, related entities, and session provenance. |
 
-### Journals
+### Journals (read)
 
 | Tool | Description |
 |------|-------------|
@@ -147,11 +153,42 @@ The Archivist MCP server exposes 27 read-only tools for accessing campaign data:
 | `list_journal_folders` | List journal folders for a campaign, ordered by path and position for tree rendering. |
 | `get_journal_folder` | Get a specific journal folder by ID. |
 
-### Relationships
+### Relationships (read)
 
 | Tool | Description |
 |------|-------------|
 | `list_links` | List links between entities. Filter by source/target entity and relationship alias. |
+
+### Write Tools
+
+Write tools mirror the REST API. Campaign delete, session delete, beat reorder/batch-edit, campaign settings, cast/member management, and multipart recording uploads are **not** exposed.
+
+| Category | Tools |
+|----------|-------|
+| Campaigns | `create_campaign`, `update_campaign` |
+| Sessions | `create_session`, `patch_session`, `update_session` |
+| Beats | `create_beat`, `update_beat`, `delete_beat` |
+| Moments | `create_moment`, `update_moment`, `delete_moment` |
+| Characters | `create_character`, `update_character`, `delete_character` |
+| Factions | `create_faction`, `update_faction`, `delete_faction` |
+| Locations | `create_location`, `update_location`, `delete_location` |
+| Items | `create_item`, `update_item`, `delete_item` |
+| Quests | `create_quest`, `update_quest`, `delete_quest` |
+| Journals | `create_journal`, `update_journal`, `delete_journal` |
+| Journal folders | `create_journal_folder`, `update_journal_folder`, `delete_journal_folder` |
+| Links | `create_link`, `update_link`, `delete_link`, `bulk_link_maintenance` |
+
+### Image Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_image_usage` | Check image quota for a campaign before generating. |
+| `generate_image` | AI-generate an image from entity context; returns a URL (attach via update tool). |
+| `init_image_upload` | Step 1: reserve object key and presigned PUT URL. |
+| `complete_image_upload` | Step 2: validate upload, moderate, and optionally attach. |
+| `delete_entity_image` | Detach/delete by entity or by managed image URL. |
+
+Direct upload requires an HTTP PUT to the presigned URL between init and complete — outside the MCP transport. Prefer `generate_image` when your client cannot make arbitrary PUTs.
 
 ## REST API
 
