@@ -20,7 +20,7 @@ Archivist MCP can be listed in Anthropic's **Connectors Directory** (Claude.ai, 
 | **Server URL** | `https://mcp.myarchivist.ai/mcp` |
 | **Transport** | Streamable HTTP |
 | **Auth** | OAuth 2.0 (PKCE) + dynamic client registration |
-| **Read/write** | Read-only (v1 — all 27 tools) |
+| **Read/write** | Read + write (68 tools — OAuth `agent_write` for mutations) |
 | **Registry ID** | `io.github.Astrotomic/archivist-ai` |
 | **Privacy policy** | https://www.myarchivist.ai/privacy |
 | **Documentation** | https://www.myarchivist.ai/mcp |
@@ -33,7 +33,7 @@ Archivist MCP can be listed in Anthropic's **Connectors Directory** (Claude.ai, 
 ### Short description (55 characters max)
 
 ```text
-Read-only campaign memory for tabletop RPG storytelling
+Read/write TTRPG campaign memory for AI assistants
 ```
 
 (55 characters)
@@ -41,7 +41,7 @@ Read-only campaign memory for tabletop RPG storytelling
 ### Long description (50–100 words)
 
 ```text
-Archivist AI gives Claude persistent memory of your tabletop RPG campaigns. Connect with OAuth to browse campaigns, recap sessions, look up characters and NPCs, track quests, read journals, and explore relationships between factions, locations, and items. The connector exposes 27 read-only tools backed by Archivist's first-party API—no write access in v1. Ideal for session prep, between-session recaps, lore lookup, and answering questions about your world without leaving Claude.
+Archivist AI gives Claude persistent memory of your tabletop RPG campaigns. Connect with OAuth to browse campaigns, recap sessions, look up characters and NPCs, track quests, read journals, create and update world entities, manage links, and attach entity images. The connector exposes 68 MCP tools (read and write) backed by Archivist's API. Ideal for session prep, between-session recaps, lore lookup, and maintaining campaign continuity without leaving Claude.
 ```
 
 ## Form copy — use cases + example prompts
@@ -117,8 +117,8 @@ What do we know about the Thieves' Guild across all sessions?
 - [ ] Server live at `https://mcp.myarchivist.ai/mcp`
 - [ ] Streamable HTTP transport
 - [ ] OAuth works end-to-end in **Claude.ai** as a custom connector ([setup guide](../examples/claude-ai/README.md))
-- [ ] Every tool has `title` + `readOnlyHint: true` (verify with `./scripts/verify-server-card.sh`)
-- [ ] All 27 tools return useful data for valid inputs ([tool testing matrix](./tool-testing.md))
+- [ ] Every tool has `title` and appropriate MCP annotations (verify with `./scripts/verify-server-card.sh`)
+- [ ] Read and write tools return useful data for valid inputs ([tool testing matrix](./tool-testing.md))
 - [ ] Tool handlers complete within 5 minutes; responses stay under 25k tokens where possible
 - [ ] Server calls first-party Archivist API only (domain alignment)
 
@@ -146,7 +146,7 @@ What do we know about the Thieves' Guild across all sessions?
 | Generic tool errors | Run [tool-testing.md](./tool-testing.md) before submit |
 | Incomplete test account | Create dedicated reviewer account with real campaign data |
 | Vague tool descriptions | Descriptions match behavior; see server card |
-| Read+write in one tool | ✓ All tools read-only, separate endpoints |
+| Read+write in one tool | ✓ Read and write are separate tools with distinct annotations |
 
 ## After approval
 

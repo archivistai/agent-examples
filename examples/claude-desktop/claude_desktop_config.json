@@ -6,3 +6,72 @@
     }
   }
 }
+
+
+[
+  {
+    "clientId": "cmjg7hg3u000004jx56zo4yg6",
+    "clientSecret": "cmjg7o6u8000104jx1i4v4n7g",
+    "name": "Alexa Skill",
+    "service": "alexa",
+    "redirectUris": [
+      "https://layla.amazon.com/api/skill/link/M2UH9E0AWZOHAC",
+      "https://pitangui.amazon.com/api/skill/link/M2UH9E0AWZOHAC",
+      "https://alexa.amazon.co.jp/api/skill/link/M2UH9E0AWZOHAC"
+    ],
+    "allowedScopes": []
+  },
+  {
+    "clientId": "cmjg7macos000004jxabcdefg",
+    "clientSecret": "cmjg7macos0000104jxsecret",
+    "name": "Archivist MacOS",
+    "service": "archivist_macos",
+    "redirectUris": [
+      "archivist://oauth/callback"
+    ],
+    "allowedScopes": []
+  },
+  {
+    "clientId": "archivist-mobile",
+    "name": "Archivist Mobile",
+    "service": "mobile",
+    "publicClient": true,
+    "pkceRequired": true,
+    "requireWorldSelection": false,
+    "redirectUris": [
+      "archivistmobile://"
+    ],
+    "allowedScopes": [
+      "profile"
+    ]
+  },
+  {
+    "clientId": "archivist_mcp",
+    "name": "Archivist MCP",
+    "service": "mcp",
+    "publicClient": true,
+    "pkceRequired": true,
+    "requireWorldSelection": false,
+    "redirectUris": [
+      "https://mcp.myarchivist.ai/oauth/callback",
+      "https://chatgpt.com/connector/oauth/mXR1lNnhIXiA",
+      "cursor://anysphere.cursor-mcp/oauth/callback"
+    ],
+    "allowLoopbackRedirect": true,
+    "accessTokenTtlSeconds": 2592000,
+    "refreshTokenTtlDays": 365
+  }
+]
+
+"apiProfile": "product",
+"allowedScopes": [
+  "profile",
+  "product_read",
+  "product_write",
+  "worlds_read",
+  "worlds_write",
+  "sessions_read",
+  "sessions_write",
+  "characters_read",
+  "characters_write"
+]
