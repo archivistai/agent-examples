@@ -2,7 +2,7 @@
 
 Human-readable tool list for Anthropic Connectors Directory submission. Generated from live server card at `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`.
 
-**Tool count:** 68 (28 read, 40 write) · **Refresh from live server card** · Annotations vary by tool (`readOnlyHint`, `destructiveHint`)
+**Tool count:** 67 (28 read, 39 write) · **Refresh from live server card** · Annotations vary by tool (`readOnlyHint`, `destructiveHint`)
 
 | MCP name | Title | Snake alias | Description |
 |----------|-------|-------------|-------------|

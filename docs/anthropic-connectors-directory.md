@@ -20,7 +20,7 @@ Archivist MCP can be listed in Anthropic's **Connectors Directory** (Claude.ai, 
 | **Server URL** | `https://mcp.myarchivist.ai/mcp` |
 | **Transport** | Streamable HTTP |
 | **Auth** | OAuth 2.0 (PKCE) + dynamic client registration |
-| **Read/write** | Read + write (68 tools — OAuth `agent_write` for mutations) |
+| **Read/write** | Read + write (67 tools — OAuth `agent_write` for mutations) |
 | **Registry ID** | `io.github.Astrotomic/archivist-ai` |
 | **Privacy policy** | https://www.myarchivist.ai/privacy |
 | **Documentation** | https://www.myarchivist.ai/mcp |
@@ -41,7 +41,7 @@ Read/write TTRPG campaign memory for AI assistants
 ### Long description (50–100 words)
 
 ```text
-Archivist AI gives Claude persistent memory of your tabletop RPG campaigns. Connect with OAuth to browse campaigns, recap sessions, look up characters and NPCs, track quests, read journals, create and update world entities, manage links, and attach entity images. The connector exposes 68 MCP tools (read and write) backed by Archivist's API. Ideal for session prep, between-session recaps, lore lookup, and maintaining campaign continuity without leaving Claude.
+Archivist AI gives Claude persistent memory of your tabletop RPG campaigns. Connect with OAuth to browse campaigns, recap sessions, look up characters and NPCs, track quests, read journals, create and update world entities, manage links, and attach entity images. The connector exposes 67 MCP tools (read and write) backed by Archivist's API. Ideal for session prep, between-session recaps, lore lookup, and maintaining campaign continuity without leaving Claude.
 ```
 
 ## Form copy — use cases + example prompts
