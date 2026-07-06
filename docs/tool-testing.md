@@ -1,6 +1,6 @@
 # MCP Tool Testing Matrix
 
-Run before Anthropic Connectors Directory submission. The server exposes **68 tools** (28 read, 40 write). Test read tools with a read-scoped OAuth client; test write and image tools with `agent_write` scope or a Bearer API key.
+Run before Anthropic Connectors Directory submission. The server exposes **67 tools** (28 read, 39 write). Test read tools with a read-scoped OAuth client; test write and image tools with `agent_write` scope or a Bearer API key.
 
 Verify live metadata first:
 
@@ -66,7 +66,7 @@ Test with `agent_write` scope or Bearer API key. Full list: [mcp-tool-reference.
 | Compendium | `create_character` → `update_character` (with `with_links: true` read first) → `delete_character` on a throwaway record |
 | Links | `create_link` → `update_link` → `delete_link` |
 | Images | `get_image_usage` → `generate_image` (or `init_image_upload` + PUT + `complete_image_upload`) → `delete_entity_image` |
-| Sessions | `create_session` → `patch_session` (no delete — not exposed) |
+| Sessions | `patch_session` on an existing session (no create or delete — not exposed) |
 
 ## Testing surfaces
 

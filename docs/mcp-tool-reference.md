@@ -7,11 +7,11 @@ Complete reference for tools on the Archivist AI MCP server (v2.1).
 **Authentication:** OAuth 2.0 (PKCE) or Bearer token
 **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
 
-**68 tools total:** 28 read, 40 write (including five image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
+**67 tools total:** 28 read, 39 write (including five image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
 
 **Wikilinks:** Before editing description, summary, moment content, or journal body fields, read with `with_links: true` on the matching get/list tool. See the [server README](https://github.com/Astrotomic/mcp.myarchivist.ai#wikilinks) for per-entity write contracts.
 
-**Not exposed:** campaign delete, session delete, beat reorder/batch-edit, campaign settings, cast/member management, multipart recording uploads, and first-party product-only API routes.
+**Not exposed:** campaign delete, session create/delete, beat reorder/batch-edit, campaign settings, cast/member management, multipart recording uploads, and first-party product-only API routes.
 
 ---
 
@@ -348,7 +348,6 @@ Write tools mirror the REST API. Parameters match the corresponding `POST`, `PAT
 
 | Tool | Required params | Notes |
 |------|-----------------|-------|
-| `create_session` | `campaign_id` | |
 | `patch_session` | `session_id` | Partial update; explicit-link wikilink contract |
 | `update_session` | `session_id` | Full PUT; explicit-link wikilink contract |
 

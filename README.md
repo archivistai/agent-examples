@@ -84,7 +84,7 @@ Add to your MCP configuration:
 
 ## MCP Tools Reference
 
-The Archivist MCP server (v2.1) exposes **68 tools**: 28 read tools and 40 write tools (including five image tools). Read tools are idempotent; delete tools are destructive but idempotent.
+The Archivist MCP server (v2.1) exposes **67 tools**: 28 read tools and 39 write tools (including five image tools). Read tools are idempotent; delete tools are destructive but idempotent.
 
 For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-tool-reference.md). Source of truth: [mcp.myarchivist.ai README](https://github.com/Astrotomic/mcp.myarchivist.ai).
 
@@ -161,12 +161,12 @@ For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-
 
 ### Write Tools
 
-Write tools mirror the REST API. Campaign delete, session delete, beat reorder/batch-edit, campaign settings, cast/member management, and multipart recording uploads are **not** exposed.
+Write tools mirror the REST API. Campaign delete, session create/delete, beat reorder/batch-edit, campaign settings, cast/member management, and multipart recording uploads are **not** exposed.
 
 | Category | Tools |
 |----------|-------|
 | Campaigns | `create_campaign`, `update_campaign` |
-| Sessions | `create_session`, `patch_session`, `update_session` |
+| Sessions | `patch_session`, `update_session` |
 | Beats | `create_beat`, `update_beat`, `delete_beat` |
 | Moments | `create_moment`, `update_moment`, `delete_moment` |
 | Characters | `create_character`, `update_character`, `delete_character` |
