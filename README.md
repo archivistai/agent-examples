@@ -84,7 +84,7 @@ Add to your MCP configuration:
 
 ## MCP Tools Reference
 
-The Archivist MCP server (v2.1) exposes **67 tools**: 28 read tools and 39 write tools (including five image tools). Read tools are idempotent; delete tools are destructive but idempotent.
+The Archivist MCP server (v2.2) exposes **67 tools**: 29 read tools and 38 write tools (including four image tools). Read tools are idempotent; delete tools are destructive but idempotent.
 
 For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-tool-reference.md). Source of truth: [mcp.myarchivist.ai README](https://github.com/Astrotomic/mcp.myarchivist.ai).
 
@@ -182,13 +182,14 @@ Write tools mirror the REST API. Campaign delete, session create/delete, beat re
 
 | Tool | Description |
 |------|-------------|
-| `get_image_usage` | Check image quota for a campaign before generating. |
-| `generate_image` | AI-generate an image from entity context; returns a URL (attach via update tool). |
+| `get_image_usage` | Check image quota for a campaign. |
 | `init_image_upload` | Step 1: reserve object key and presigned PUT URL. |
 | `complete_image_upload` | Step 2: validate upload, moderate, and optionally attach. |
 | `delete_entity_image` | Detach/delete by entity or by managed image URL. |
 
-Direct upload requires an HTTP PUT to the presigned URL between init and complete — outside the MCP transport. Prefer `generate_image` when your client cannot make arbitrary PUTs.
+Direct upload requires an HTTP PUT to the presigned URL between init and complete — outside the MCP transport. Clients that cannot make arbitrary PUTs need a human (or a separate service) to perform that step.
+
+There is no AI image-generation MCP tool. Generation stays in the Archivist AI app and on the REST API (`POST /v1/images/generate`).
 
 ## REST API
 

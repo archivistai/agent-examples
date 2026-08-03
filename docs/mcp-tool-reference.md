@@ -7,7 +7,7 @@ Complete reference for tools on the Archivist AI MCP server (v2.1).
 **Authentication:** OAuth 2.0 (PKCE) or Bearer token
 **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
 
-**67 tools total:** 28 read, 39 write (including five image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
+**67 tools total:** 29 read, 38 write (including four image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
 
 **Wikilinks:** Before editing description, summary, moment content, or journal body fields, read with `with_links: true` on the matching get/list tool. See the [server README](https://github.com/Astrotomic/mcp.myarchivist.ai#wikilinks) for per-entity write contracts.
 
@@ -411,7 +411,7 @@ Write tools mirror the REST API. Parameters match the corresponding `POST`, `PAT
 
 ## Image Tools
 
-Entity images can be attached to campaigns, characters, factions, locations, items, moments, and sessions.
+Entity images can be attached to campaigns, characters, factions, locations, items, moments, and sessions. Upload only — AI image generation is not exposed as an MCP tool.
 
 ### `get_image_usage`
 
@@ -421,18 +421,6 @@ Return the account's image quota for a campaign.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `campaign_id` | string | Yes | Campaign ID |
-
-### `generate_image`
-
-Server-side AI generation. Returns a public URL; attach via the matching update tool. Consumes quota.
-
-**Parameters:**
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `campaign_id` | string | Yes | Campaign ID |
-| `type` | string | Yes | `character`, `faction`, `location`, `item`, or `world` |
-| `entity_id` | string | No | Required for non-`world` types |
-| `user_input` | string | No | Optional prompt guidance (max 20k) |
 
 ### `init_image_upload`
 

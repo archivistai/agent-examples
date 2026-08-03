@@ -136,6 +136,7 @@ What do we know about the Thieves' Guild across all sessions?
 - [ ] Logo URL or SVG for directory listing
 - [ ] Surfaces tested: Claude.ai (minimum), optionally Desktop
 - [ ] Policy & requirements checklists completed honestly on form
+- [ ] Safety attestation matches the shipped tool surface — answer **no** to AI media generation: the connector exposes no image, audio, or video generation tool (generation lives in the Archivist AI app and on `POST /v1/images/generate`, neither of which is part of the connector)
 
 ## Common rejection reasons
 
@@ -147,6 +148,7 @@ What do we know about the Thieves' Guild across all sessions?
 | Incomplete test account | Create dedicated reviewer account with real campaign data |
 | Vague tool descriptions | Descriptions match behavior; see server card |
 | Read+write in one tool | ✓ Read and write are separate tools with distinct annotations |
+| Free-standing AI media generation | ✓ No generation tool on the connector — `generate_image` was removed in server v2.2. Directory policy disallows standalone AI image generation even inside a larger non-media product; generation is only acceptable when the same call consumes the result inside the domain workflow (e.g. attaching art to the entity it was generated for) |
 
 ## After approval
 

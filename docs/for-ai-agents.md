@@ -31,7 +31,7 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 - **Transport Type:** Streamable HTTP
 - **Authentication:** OAuth 2.0 (authorization code with PKCE) or Bearer token via API key
 - **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
-- **Tools:** 67 tools (28 read, 39 write) covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, entity links, and entity images
+- **Tools:** 67 tools (29 read, 38 write) covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, entity links, and entity images
 - **Write scope:** OAuth clients need `agent_write` for mutating tools
 
 ### Available MCP Tools
@@ -47,7 +47,7 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 **Quests:** `list_quests`, `get_quest`
 **Journals:** `list_journals`, `get_journal`, `list_journal_folders`, `get_journal_folder`
 **Links:** `list_links`, `create_link`, `update_link`, `delete_link`, `bulk_link_maintenance`
-**Images:** `get_image_usage`, `generate_image`, `init_image_upload`, `complete_image_upload`, `delete_entity_image`
+**Images:** `get_image_usage`, `init_image_upload`, `complete_image_upload`, `delete_entity_image`
 
 When editing text that may contain wikilinks, read with `with_links: true` first.
 
