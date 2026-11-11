@@ -2,7 +2,7 @@
 
 Human-readable tool list for Anthropic Connectors Directory submission. Generated from live server card at `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`.
 
-**Tool count:** 67 (29 read, 38 write) · **Refresh from live server card** · Annotations vary by tool (`readOnlyHint`, `destructiveHint`)
+**Tool count:** 87 (36 read, 51 write) · **Refresh from live server card** · Annotations vary by tool (`readOnlyHint`, `destructiveHint`)
 
 | MCP name | Title | Snake alias | Description |
 |----------|-------|-------------|-------------|
@@ -10,7 +10,8 @@ Human-readable tool list for Anthropic Connectors Directory submission. Generate
 | get-campaign-tool | Get Campaign Tool | get_campaign | Get a specific campaign by ID. |
 | get-campaign-stats-tool | Get Campaign Stats Tool | get_campaign_stats | Get statistics: character count, session count, and more. |
 | list-characters-tool | List Characters Tool | list_characters | List characters. Filter by name, type (PC/NPC), or approval status. |
-| get-character-tool | Get Character Tool | get_character | Get a character including aliases, backstory, and speaker linkage. |
+| get-character-tool | Get Character Tool | get_character | Get a character including aliases, backstory, and player_name; with_properties adds its Properties tables. |
+| get-character-arc-tool | Get Character Arc Tool | get_character_arc | A PC's Character Arc by theme; status filters approved / pending / all. |
 | list-sessions-tool | List Sessions Tool | list_sessions | List game sessions. Filter by type or public-only. |
 | get-session-tool | Get Session Tool | get_session | Get a session with optional beats and moments. |
 | get-session-cast-analysis-tool | Get Session Cast Analysis Tool | get_session_cast_analysis | Get cast analysis: talk-share breakdown and metrics. |
