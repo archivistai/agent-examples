@@ -31,13 +31,13 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 - **Transport Type:** Streamable HTTP
 - **Authentication:** OAuth 2.0 (authorization code with PKCE) or Bearer token via API key
 - **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
-- **Tools:** 67 tools (29 read, 38 write) covering campaigns, sessions, characters, locations, factions, items, quests, journals, beats, moments, transcripts, handouts, entity links, and entity images
+- **Tools:** 87 tools (36 read, 51 write) covering campaigns, sessions, characters (including Properties and Character Arc), locations, factions, items, quests, journals, beats, moments, transcripts, handouts, entity links, and entity images
 - **Write scope:** OAuth clients need `agent_write` for mutating tools
 
 ### Available MCP Tools
 
 **Campaigns:** `list_campaigns`, `get_campaign`, `get_campaign_stats`
-**Characters:** `list_characters`, `get_character`
+**Characters:** `list_characters`, `get_character`, `get_character_arc`
 **Sessions:** `list_sessions`, `get_session`, `get_session_cast_analysis`, `get_session_handout`, `get_session_transcript`
 **Beats:** `list_beats`, `get_beat`
 **Moments:** `list_moments`, `get_moment`
@@ -50,6 +50,10 @@ Archivist AI provides a Model Context Protocol (MCP) server for direct campaign 
 **Images:** `get_image_usage`, `init_image_upload`, `complete_image_upload`, `delete_entity_image`
 
 When editing text that may contain wikilinks, read with `with_links: true` first.
+
+Structured Properties (class, alignment, allies, memberships, signature item, ...) are read with `with_properties: true` on the get tools and written with `update_entity_properties`. Character Arc changes proposed by session processing stay pending until reviewed: `get_character_arc` with `status: "pending"`, then `review_character_arc_run`.
+
+If a write tool reports a timeout, the change may still have been saved: read the record back before retrying.
 
 ## REST API
 

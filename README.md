@@ -84,7 +84,7 @@ Add to your MCP configuration:
 
 ## MCP Tools Reference
 
-The Archivist MCP server (v2.2) exposes **67 tools**: 29 read tools and 38 write tools (including four image tools). Read tools are idempotent; delete tools are destructive but idempotent.
+The Archivist MCP server (v3.1) exposes **87 tools**: 36 read tools and 51 write tools (including four image tools). Read tools are idempotent; delete tools are destructive but idempotent.
 
 For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-tool-reference.md). Source of truth: [mcp.myarchivist.ai README](https://github.com/Astrotomic/mcp.myarchivist.ai).
 
@@ -105,7 +105,8 @@ For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-
 | Tool | Description |
 |------|-------------|
 | `list_characters` | List characters in a campaign. Filter by name, type (PC/NPC), or approval status. |
-| `get_character` | Get a character by ID including aliases, backstory, and speaker linkage. |
+| `get_character` | Get a character by ID including aliases, backstory, and `player_name`. Pass `with_properties: true` for its Properties tables. |
+| `get_character_arc` | A PC's Character Arc by theme. `status`: `approved`, `pending` (awaiting review, with `run_id`) or `all`. |
 
 ### Sessions (read)
 
@@ -131,11 +132,11 @@ For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-
 | Tool | Description |
 |------|-------------|
 | `list_factions` | List factions in a campaign. Factions represent guilds, organisations, or other groups. |
-| `get_faction` | Get a specific faction by ID. |
+| `get_faction` | Get a specific faction by ID. Accepts `with_properties`. |
 | `list_locations` | List locations in a campaign. Locations can be nested (cities, taverns, dungeons, etc.). |
-| `get_location` | Get a specific location by ID. |
+| `get_location` | Get a specific location by ID. Accepts `with_properties`. |
 | `list_items` | List items in a campaign. Items include weapons, armour, artefacts, and other notable objects. |
-| `get_item` | Get a specific item by ID. |
+| `get_item` | Get a specific item by ID. Accepts `with_properties`. |
 
 ### Quests (read)
 
@@ -170,6 +171,8 @@ Write tools mirror the REST API. Campaign delete, session create/delete, beat re
 | Beats | `create_beat`, `update_beat`, `delete_beat` |
 | Moments | `create_moment`, `update_moment`, `delete_moment` |
 | Characters | `create_character`, `update_character`, `delete_character` |
+| Character Arc | `create_character_arc_facet`, `update_character_arc_facet`, `delete_character_arc_facet`, `review_character_arc_run` |
+| Properties | `update_entity_properties` (characters, factions, locations, items) |
 | Factions | `create_faction`, `update_faction`, `delete_faction` |
 | Locations | `create_location`, `update_location`, `delete_location` |
 | Items | `create_item`, `update_item`, `delete_item` |

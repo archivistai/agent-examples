@@ -1,15 +1,17 @@
 # Archivist AI MCP Tool Reference
 
-Complete reference for tools on the Archivist AI MCP server (v2.1).
+Complete reference for tools on the Archivist AI MCP server (v3.1).
 
 **Server URL:** `https://mcp.myarchivist.ai/mcp`
 **Transport:** Streamable HTTP
 **Authentication:** OAuth 2.0 (PKCE) or Bearer token
 **Server Card:** `https://mcp.myarchivist.ai/.well-known/mcp/server-card.json`
 
-**67 tools total:** 29 read, 38 write (including four image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
+**87 tools total:** 36 read, 51 write (including four image tools). Read tools are idempotent. Delete tools are destructive but idempotent. OAuth write tools require the `agent_write` scope.
 
 **Wikilinks:** Before editing description, summary, moment content, or journal body fields, read with `with_links: true` on the matching get/list tool. See the [server README](https://github.com/Astrotomic/mcp.myarchivist.ai#wikilinks) for per-entity write contracts.
+
+**Timeouts:** if a write tool reports that the API did not respond in time, the change may still have been saved. Read the record back before retrying.
 
 **Not exposed:** campaign delete, session create/delete, beat reorder/batch-edit, campaign settings, cast/member management, multipart recording uploads, and first-party product-only API routes.
 
@@ -63,12 +65,30 @@ List characters in a campaign. Optionally filter by name search, character type,
 
 ### `get_character`
 
-Get a specific character by ID including aliases, backstory, and speaker linkage.
+Get a specific character by ID including aliases, backstory, and `player_name` (the assigned player's display name).
 
 **Parameters:**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `character_id` | string | Yes | The character ID |
+| `with_properties` | boolean | No | Also return the entity's structured Properties tables (fields with key, field_type, options, connection_types, value, and `connections` with entity ids) |
+
+---
+
+## Character Arc
+
+Character Arc is available for player characters (type `PC`): facets grouped under seven themes (`CharacterDevelopment`, `Relationships`, `CombatCapability`, `KnowledgeDiscovery`, `ReputationAffiliation`, `ItemsResources`, `ConditionsConsequences`), each tagged with a session.
+
+### `get_character_arc`
+
+**Parameters:**
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `character_id` | string | Yes | The PC's character ID |
+| `status` | string | No | `approved` (canonical arc), `pending` (changes from session processing awaiting review, each with `run_id` and `previous_description` for updates), or `all` (default) |
+| `session_id` | string | No | Only facets tagged with this session |
+
+Facets with `hidden: true` are internal pipeline markers; ignore them.
 
 ---
 
@@ -196,6 +216,7 @@ Get a specific faction by ID.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `faction_id` | string | Yes | The faction ID |
+| `with_properties` | boolean | No | Also return the entity's structured Properties tables (fields with key, field_type, options, connection_types, value, and `connections` with entity ids) |
 
 ---
 
@@ -220,6 +241,7 @@ Get a specific location by ID.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `location_id` | string | Yes | The location ID |
+| `with_properties` | boolean | No | Also return the entity's structured Properties tables (fields with key, field_type, options, connection_types, value, and `connections` with entity ids) |
 
 ---
 
@@ -244,6 +266,7 @@ Get a specific item by ID.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `item_id` | string | Yes | The item ID |
+| `with_properties` | boolean | No | Also return the entity's structured Properties tables (fields with key, field_type, options, connection_types, value, and `connections` with entity ids) |
 
 ---
 
@@ -378,13 +401,23 @@ Write tools mirror the REST API. Parameters match the corresponding `POST`, `PAT
 | `create_item` | `campaign_id`, `name` | |
 | `update_item` | `item_id` | |
 | `delete_item` | `item_id` | |
+| `update_entity_properties` | `campaign_id`, `entity_type`, `entity_id`, `properties` | Partial: only the keys sent change. Connection fields take entity ids/names (replace) or `{"add": [...], "remove": [...]}`; unknown keys or unresolved entities are rejected |
+
+### Character Arc
+
+| Tool | Required params | Notes |
+|------|-----------------|-------|
+| `create_character_arc_facet` | `character_id`, `theme`, `title`, `description` | Optional `session_id`; 409 if a current facet with that title exists in the theme |
+| `update_character_arc_facet` | `character_id`, `facet_id` | Title/description changes create a new version (new id); theme/session-only changes retag in place |
+| `delete_character_arc_facet` | `character_id`, `facet_id` | Restores the version it replaced (`restored_id`) |
+| `review_character_arc_run` | `character_id`, `run_id`, `action` | `approve` or `decline` every pending change from one session-processing run |
 
 ### Quests
 
 | Tool | Required params | Notes |
 |------|-----------------|-------|
 | `create_quest` | `campaign_id`, `quest_name` | No wikilinks; use `related_*` lists |
-| `update_quest` | `quest_id` | Sent lists replace stored lists |
+| `update_quest` | `quest_id` | Sent lists replace stored lists. Send objectives as `{id, text, status}` and `progress_log` entries as `{id, text, session_id?}` to keep each entry's id and session |
 | `delete_quest` | `quest_id` | Deletes objectives and related refs |
 
 ### Journals
