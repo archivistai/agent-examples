@@ -9,7 +9,7 @@ Human-readable tool list for Anthropic Connectors Directory submission. Generate
 | list-campaigns-tool | List Campaigns Tool | list_campaigns | List your campaigns. Returns a paginated list. |
 | get-campaign-tool | Get Campaign Tool | get_campaign | Get a specific campaign by ID. |
 | get-campaign-stats-tool | Get Campaign Stats Tool | get_campaign_stats | Get statistics: character count, session count, and more. |
-| list-characters-tool | List Characters Tool | list_characters | List characters. Filter by name, type (PC/NPC), or approval status. |
+| list-characters-tool | List Characters Tool | list_characters | List characters. Filter by name, type (PC/NPC/Creature), or approval status. |
 | get-character-tool | Get Character Tool | get_character | Get a character including aliases, backstory, and player_name; with_properties adds its Properties tables. |
 | get-character-arc-tool | Get Character Arc Tool | get_character_arc | A PC's Character Arc by theme; status filters approved / pending / all. |
 | list-sessions-tool | List Sessions Tool | list_sessions | List game sessions. Filter by type or public-only. |

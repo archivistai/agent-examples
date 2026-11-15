@@ -53,14 +53,14 @@ Get statistics for a specific campaign: character count, session count, and more
 
 ### `list_characters`
 
-List characters in a campaign. Optionally filter by name search, character type, and approval status.
+List characters in a campaign. Optionally filter by name search, character type, and approval status. Creatures are Character records (`type: "Creature"`), so the same get/create/update/delete tools apply. Pass `character_type: "Creature"` to list only Creatures, including when searching by name.
 
 **Parameters:**
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `campaign_id` | string | Yes | The campaign ID to list characters from |
 | `search` | string | No | Search characters by name |
-| `character_type` | string | No | Filter by type, e.g. PC or NPC |
+| `character_type` | string | No | Filter by type, e.g. PC, NPC, or Creature |
 | `approved_only` | boolean | No | When true, only return approved characters (default: true) |
 
 ### `get_character`

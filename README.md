@@ -104,9 +104,11 @@ For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-
 
 | Tool | Description |
 |------|-------------|
-| `list_characters` | List characters in a campaign. Filter by name, type (PC/NPC), or approval status. |
+| `list_characters` | List characters in a campaign. Filter by name, type (PC/NPC/Creature), or approval status. |
 | `get_character` | Get a character by ID including aliases, backstory, and `player_name`. Pass `with_properties: true` for its Properties tables. |
 | `get_character_arc` | A PC's Character Arc by theme. `status`: `approved`, `pending` (awaiting review, with `run_id`) or `all`. |
+
+Creatures use the Character tools with `type: "Creature"`; pass `character_type: "Creature"` to `list_characters` to filter results, including alongside `search`. Links and images use the canonical `Character` entity type and record ID.
 
 ### Sessions (read)
 
