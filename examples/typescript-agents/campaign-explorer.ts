@@ -66,10 +66,10 @@ const archivistTools = {
   }),
 
   listCharacters: tool({
-    description: "List characters. Optionally filter by type (PC/NPC) or search by name.",
+    description: "List characters. Optionally filter by type (PC/NPC/Creature) or search by name.",
     parameters: z.object({
       campaignId: z.string().describe("The campaign ID"),
-      characterType: z.string().optional().describe("PC or NPC"),
+      characterType: z.string().optional().describe("PC, NPC, or Creature"),
       search: z.string().optional().describe("Search by name"),
     }),
     execute: async ({ campaignId, characterType, search }) => {

@@ -85,7 +85,7 @@ tools = [
                 "type": "object",
                 "properties": {
                     "campaign_id": {"type": "string"},
-                    "character_type": {"type": "string", "description": "PC or NPC"},
+                    "character_type": {"type": "string", "description": "PC, NPC, or Creature"},
                 },
                 "required": ["campaign_id"],
             },

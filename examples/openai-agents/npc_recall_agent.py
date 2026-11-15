@@ -40,13 +40,13 @@ tools = [
         "type": "function",
         "function": {
             "name": "list_characters",
-            "description": "List characters in a campaign. Filter by type (PC/NPC) or search by name.",
+            "description": "List characters in a campaign. Filter by type (PC/NPC/Creature) or search by name.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "campaign_id": {"type": "string", "description": "The campaign ID."},
                     "search": {"type": "string", "description": "Search by character name."},
-                    "character_type": {"type": "string", "description": "Filter: PC or NPC."},
+                    "character_type": {"type": "string", "description": "Filter: PC, NPC, or Creature."},
                 },
                 "required": ["campaign_id"],
             },
