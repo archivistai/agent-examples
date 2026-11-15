@@ -108,7 +108,7 @@ For the complete parameter reference, see [docs/mcp-tool-reference.md](docs/mcp-
 | `get_character` | Get a character by ID including aliases, backstory, and `player_name`. Pass `with_properties: true` for its Properties tables. |
 | `get_character_arc` | A PC's Character Arc by theme. `status`: `approved`, `pending` (awaiting review, with `run_id`) or `all`. |
 
-Creatures use the Character tools with `type: "Creature"`; pass `character_type: "Creature"` to `list_characters` to filter results, including alongside `search`. Links and images use the canonical `Character` entity type and record ID.
+Creatures use the Character tools with `type: "Creature"`; pass `character_type: "Creature"` to `list_characters` to filter results, including alongside `search`. Use the Character record ID for links and image uploads. Links use `Character` for `from_type` or `to_type`; image uploads use lowercase `character` for `entity_type`.
 
 ### Sessions (read)
 
